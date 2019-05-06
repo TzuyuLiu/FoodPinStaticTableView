@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import UIKit
+
 //MARK: - 將輸入框的四角改成圓形
 class RoundedTextField: UITextField {
     
