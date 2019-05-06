@@ -179,8 +179,9 @@ class NewRestaurantController: UITableViewController , UITextFieldDelegate ,UIIm
     //當從圖片庫選擇照片後，imagePickerController:didFinishPickingMediaWithInfo會被呼叫
     //當被呼叫時，系統會傳送一個包含圖片的info字典物件
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
+        //MARK: - 使用程式碼刻出Auto layout
         //UIImagePickerController.InfoKey.originalImage是使用者所選圖片的鍵
+        
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             
             photoImageView.image = selectedImage
@@ -188,10 +189,65 @@ class NewRestaurantController: UITableViewController , UITextFieldDelegate ,UIIm
             //圖片以什麼模式呈現
             photoImageView.contentMode = .scaleAspectFill
             photoImageView.clipsToBounds = true
+            
+            let leadingConstraint =
+                NSLayoutConstraint(item: photoImageView,    //item對應到First Item
+                                   attribute: .leading,     //attribute對應到First item.後面的項目
+                                   relatedBy: .equal,       //對應到Relation
+                                   toItem: photoImageView.superview,    //toItem對應到Second Item
+                                   attribute: .leading,     //attribute對應到Second Item.後面的項目
+                                   multiplier: 1,       //一樣對應到multiplier
+                                   constant: 0)     //一樣
+            
+            //isActive要true才會有layout
+            leadingConstraint.isActive = true
+            
+            
+            let trailingConstraint =
+                NSLayoutConstraint(item: photoImageView,    //item對應到First Item
+                    attribute: .trailing,     //attribute對應到First item.後面的項目
+                    relatedBy: .equal,       //對應到Relation
+                    toItem: photoImageView.superview,    //toItem對應到Second Item
+                    attribute: .trailing,     //attribute對應到Second Item.後面的項目
+                    multiplier: 1,       //一樣對應到multiplier
+                    constant: 0)     //一樣
+            
+            //isActive要true才會有layout
+            trailingConstraint.isActive = true
+            
+            
+            let topConstraint =
+                NSLayoutConstraint(item: photoImageView,    //item對應到First Item
+                    attribute: .top,     //attribute對應到First item.後面的項目
+                    relatedBy: .equal,       //對應到Relation
+                    toItem: photoImageView.superview,    //toItem對應到Second Item
+                    attribute: .top,     //attribute對應到Second Item.後面的項目
+                    multiplier: 1,       //一樣對應到multiplier
+                    constant: 0)     //一樣
+            
+            //isActive要true才會有layout
+            topConstraint.isActive = true
+            
+            
+            let bottomConstraint =
+                NSLayoutConstraint(item: photoImageView,    //item對應到First Item
+                    attribute: .bottom,     //attribute對應到First item.後面的項目
+                    relatedBy: .equal,       //對應到Relation
+                    toItem: photoImageView.superview,    //toItem對應到Second Item
+                    attribute: .bottom,     //attribute對應到Second Item.後面的項目
+                    multiplier: 1,       //一樣對應到multiplier
+                    constant: 0)     //一樣
+            
+            //isActive要true才會有layout
+            bottomConstraint.isActive = true
         }
         
         dismiss(animated: true, completion: nil)
+        
     }
+    
+    
+ 
     
 
 }
