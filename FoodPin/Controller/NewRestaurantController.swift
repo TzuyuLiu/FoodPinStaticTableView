@@ -9,10 +9,28 @@
 import UIKit
 
 //使用UITextFieldDelegate協定來偵測return被按下
-class NewRestaurantController: UITableViewController , UITextFieldDelegate{
+//使用UIImagePickerControllerDelegate與UINavigationControllerDelegate來知道選擇哪張圖片
+class NewRestaurantController: UITableViewController , UITextFieldDelegate ,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+    
+    @IBOutlet var photoImageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        //設定navigation bar外觀
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
+        if let customFont = UIFont(name: "Rubik", size: 35.0){
+            
+            navigationController?.navigationBar.largeTitleTextAttributes = [
+                NSAttributedString.Key.foregroundColor: UIColor.red,
+                NSAttributedString.Key.font: customFont]
+        }   else{
+            print("navigation bar字體設置失敗")
+        }
+        
     }
 
     //我們為所有的文字欄位與圖示增加標籤值
@@ -83,4 +101,97 @@ class NewRestaurantController: UITableViewController , UITextFieldDelegate{
         return true
     }
     
+    
+    //MARK: - 實作挑選照片. 或是拍照
+    
+    //某個cell被選取後會呼叫table:didselectrowat方法
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //如果是第一個cell(也就是image那邊)
+        if indexPath.row == 0{
+            
+            //建立一個AlertController
+            let photoSourceRequestController =
+                UIAlertController(title: "",            //UIAlertController：代表要建立一個跳出來的選單
+                    message: "Choose your photo source",
+                    preferredStyle: .actionSheet) //actionSheet:從下方出現AlertController
+            
+            //相機
+            let cameraAction =
+                UIAlertAction(title: "Camera", style: .default) {   //新增一個UIAlertAction，表示為相機
+                    (action) in
+                    
+                    //isSourceTypeAvailable：如果使用者同意使用某種特定的type來選取media
+                    if UIImagePickerController.isSourceTypeAvailable(.camera){
+                        
+                        let imagePicker = UIImagePickerController()
+                        imagePicker.delegate = self
+                        imagePicker.allowsEditing = false
+                        
+                        //.sourceType:代表從哪裡取得
+                        imagePicker.sourceType = .camera
+                        
+                        //使用present:animated:completion帶出來相機
+                        self.present(imagePicker, animated: true, completion: nil)
+                        
+                    }
+            }
+            
+            //相簿
+            let photoLibraryAction =
+                UIAlertAction(title: "Photo library", style: .default) {   //新增一個UIAlertAction
+                    (action) in
+                    
+                    //isSourceTypeAvailable：如果使用者同意使用某種特定的type來選取media
+                    if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+                        
+                        let imagePicker = UIImagePickerController()
+                        imagePicker.delegate = self
+
+                        imagePicker.allowsEditing = false
+                        imagePicker.sourceType = .photoLibrary
+                        
+                        //使用present:animated:completion帶出來相簿
+                        self.present(imagePicker, animated: true, completion: nil)
+                        
+                    }
+            }
+            
+            //將兩種action加入UIAlertController選單裡面
+            photoSourceRequestController.addAction(cameraAction)
+            photoSourceRequestController.addAction(photoLibraryAction)
+            
+            
+            //針對ipad
+            if let popoverController = photoSourceRequestController.popoverPresentationController{
+                
+                if let cell = tableView.cellForRow(at: indexPath){
+                    
+                    popoverController.sourceView = cell
+                    popoverController.sourceRect = cell.bounds
+                }
+            }
+            
+            present(photoSourceRequestController, animated: true, completion: nil)
+        }
+    }
+    
+    //當從圖片庫選擇照片後，imagePickerController:didFinishPickingMediaWithInfo會被呼叫
+    //當被呼叫時，系統會傳送一個包含圖片的info字典物件
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        //UIImagePickerController.InfoKey.originalImage是使用者所選圖片的鍵
+        if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
+            
+            photoImageView.image = selectedImage
+            
+            //圖片以什麼模式呈現
+            photoImageView.contentMode = .scaleAspectFill
+            photoImageView.clipsToBounds = true
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+
 }
