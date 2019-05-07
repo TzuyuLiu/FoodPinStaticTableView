@@ -137,7 +137,7 @@ class RestaurantDetailViewController: UIViewController , UITableViewDataSource ,
         
     }
     
-    //MARK: - 使用segue傳送資料
+    //MARK: - 當按下按鈕後，若是使用使用show segue，此時可以使用prepare來傳送資料
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -156,7 +156,7 @@ class RestaurantDetailViewController: UIViewController , UITableViewDataSource ,
     }
     
     
-    //MARK: - 當view關閉時會呼叫此，此為實作ReviewViewController的退回按鈕
+    //MARK: - 當評分頁面關閉時會呼叫此，此為實作ReviewViewController的退回按鈕
     @IBAction func close(segue: UIStoryboardSegue){
         
         dismiss(animated: true, completion: nil)

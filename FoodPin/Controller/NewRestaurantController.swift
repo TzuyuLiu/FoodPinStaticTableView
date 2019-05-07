@@ -247,7 +247,7 @@ class NewRestaurantController: UITableViewController , UITextFieldDelegate ,UIIm
     }
     
     
-    //MARK: -移除分隔符號
+    //MARK: - 練習一：移除分隔符號
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
@@ -256,6 +256,41 @@ class NewRestaurantController: UITableViewController , UITextFieldDelegate ,UIIm
      }
     
     
+    //MARK: - 練習2：做一個Save button
+    @IBAction func saveRestaurant(sender:AnyObject){
+        if nameTextField.text == "" || typeTextField.text == "" || addressTextField.text == "" || phoneTextField.text == "" || descriptionTextView.text == ""{
+            
+            //使用UIAlertController產生alert，UIAlertController是回傳一個View，所以沒辦法有按下的行為
+            let warningView = UIAlertController(title: "Warning", message: "有空格歐", preferredStyle: .alert)
+            
+            //要有動作(按下button)只能使用UIAlertAction，定義為 An action that can be taken when the user taps a button in an alert.
+            let okButton = UIAlertAction(title: "OK", style: .cancel , handler: nil)
+            
+            //別忘了加ok按鈕，要不然會悲劇
+            warningView.addAction(okButton)
+            
+            //產生alert之後要顯示出來
+            present(warningView,animated: true, completion: nil)
+            
+            
+            
+            //強制返回，不做任何事情
+            return
+        }
+        
+        //輸入完畢之後就可以跳回去主畫面了
+        dismiss(animated: true, completion: nil)
+        
+        //使用??來把內容拆出來
+        print("name:\(nameTextField.text ?? " ")")
+        print("type:\(typeTextField.text ?? " ")")
+        print("address:\(addressTextField.text ?? " ")")
+        print("phone:\(phoneTextField.text ?? " ")")
+        print("description:\(descriptionTextView.text ?? " ")")
+
+        
+    
+    }
  
     
 

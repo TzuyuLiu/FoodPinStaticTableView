@@ -179,10 +179,11 @@ class RestaurantTableViewController: UITableViewController {
         }
     }
     
-    //MARK: - 從add new restaurant返回
+    //MARK: - 從Add new restaurant畫面返回（關閉畫面 與 儲傳送資料)
     
+    //unwindToHome是連結到story borad的exit，所以不管怎麼樣按下按鈕後就會Exit
     @IBAction func unwindToHome(segue: UIStoryboardSegue){
-        
-        dismiss(animated: true, completion: nil)
+            dismiss(animated: true, completion: nil)
     }
+ 
 }

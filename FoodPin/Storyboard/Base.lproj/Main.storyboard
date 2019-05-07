@@ -616,7 +616,13 @@
                         <barButtonItem key="leftBarButtonItem" image="close" id="r6M-me-f0x">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="3Sz-0w-erH" kind="unwind" unwindAction="unwindToHomeWithSegue:" id="X2b-Vs-dhE"/>
+                                <segue destination="3Sz-0w-erH" kind="unwind" identifier="close" unwindAction="unwindToHomeWithSegue:" id="X2b-Vs-dhE"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="save" image="save" id="Cbe-qR-MYr">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="saveRestaurantWithSender:" destination="VH9-9B-xb8" id="Rd7-iY-mmg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -786,5 +792,6 @@
         <image name="photo" width="24" height="18"/>
         <image name="plus" width="16" height="16"/>
         <image name="sad" width="78" height="87"/>
+        <image name="save" width="20" height="20"/>
     </resources>
 </document>
