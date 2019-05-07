@@ -247,6 +247,15 @@ class NewRestaurantController: UITableViewController , UITextFieldDelegate ,UIIm
     }
     
     
+    //MARK: -移除分隔符號
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        //分隔符號名稱叫做separator，將它設定為無
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+     }
+    
+    
  
     
 
