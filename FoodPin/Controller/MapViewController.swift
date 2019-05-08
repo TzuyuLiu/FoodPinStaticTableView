@@ -13,7 +13,7 @@ import MapKit
 class MapViewController: UIViewController ,MKMapViewDelegate{
     
     //用來找餐廳位置
-    var restaurant = Restaurant()
+    var restaurant: RestaurantMO!
 
     @IBOutlet var mapView: MKMapView!
     
@@ -41,7 +41,9 @@ class MapViewController: UIViewController ,MKMapViewDelegate{
         //將地址轉換成全球經緯度並標記在地圖上
         let geoCoder = CLGeocoder()
         
-        geoCoder.geocodeAddressString(restaurant.location) { (placemarks, error) in
+        //在RestaurantMO裡面屬性都是optional，所以要拆開(用??判斷是否有東西，if null-> 回傳"")
+        //??：空合運算子，檢查是否有值，若無則會使用??後面的預設值
+        geoCoder.geocodeAddressString(restaurant.location ?? "") { (placemarks, error) in
             
             //如果有出錯
             if let error = error{

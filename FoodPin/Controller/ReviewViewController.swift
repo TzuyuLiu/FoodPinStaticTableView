@@ -20,7 +20,7 @@ class ReviewViewController: UIViewController {
     @IBOutlet var closeButton: UIButton!
     
     
-    var restaurant = Restaurant()
+    var restaurant: RestaurantMO!
     
     
 
@@ -29,7 +29,10 @@ class ReviewViewController: UIViewController {
         super.viewDidLoad()
     
         //插入餐廳圖片作為背景圖片
-        backgroundImageView.image = UIImage(named: restaurant.image)
+        //圖片已經使用core data來存成data物件，要載入圖片是使用data參數來初始化UIImage物件
+        if let restaurantImage = restaurant.image{
+            backgroundImageView.image = UIImage(data: restaurantImage as Data)
+        }
         
         
         //將圖片模糊

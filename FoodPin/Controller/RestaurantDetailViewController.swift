@@ -13,7 +13,7 @@ class RestaurantDetailViewController: UIViewController , UITableViewDataSource ,
     @IBOutlet var tableView: UITableView!
     @IBOutlet var headerView: RestaurantDetailHeaderView!
     
-    var restaurant = Restaurant()
+    var restaurant: RestaurantMO!
     
     
     //只有程式第一次載入view時才會執行
@@ -30,8 +30,14 @@ class RestaurantDetailViewController: UIViewController , UITableViewDataSource ,
         
         headerView.nameLabel.text = restaurant.name
         headerView.typeLabel.text = restaurant.type
-        headerView.headerImageView.image = UIImage(named: restaurant.image)
+        
+        //圖片已經使用core data來存成data物件，要載入圖片是使用data參數來初始化UIImage物件
+        if let restaurantImage = restaurant.image{
+            headerView.headerImageView.image = UIImage(data: restaurantImage as Data)
+        }
+        
         headerView.heartImageView.isHidden = (restaurant.isVisited) ? false : true
+
         
         //將分隔線隱藏
         tableView.separatorStyle = .none
@@ -126,8 +132,11 @@ class RestaurantDetailViewController: UIViewController , UITableViewDataSource ,
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailMapCell.self), for: indexPath) as! RestaurantDetailMapCell
             
             //顯示地圖正確位置(configure是在RestaurantDetailMapCell.swift中)
-            cell.configure(location: restaurant.location)
-            cell.selectionStyle = .none
+            //RestaurantMO屬性都是optional，因此要解開
+            if let restaurantLocation = restaurant.location{
+                cell.configure(location: restaurantLocation)
+                cell.selectionStyle = .none
+            }
             
             return cell
             

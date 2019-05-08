@@ -28,6 +28,7 @@
 		631B8835227B243800718594 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631B8834227B243800718594 /* ReviewViewController.swift */; };
 		632EAA08227D7BD40005E217 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632EAA07227D7BD40005E217 /* RoundedTextField.swift */; };
 		635C3358227F37DE005E9097 /* NewRestaurantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635C3357227F37DE005E9097 /* NewRestaurantController.swift */; };
+		63BA644822831C3B003DCE7C /* FoodPin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63BA644622831C3B003DCE7C /* FoodPin.xcdatamodeld */; };
 		F44705AE211AF99E002E0327 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44705AD211AF99E002E0327 /* AppDelegate.swift */; };
 		F44705B3211AF99E002E0327 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F44705B1211AF99E002E0327 /* Main.storyboard */; };
 		F44705B5211AF99F002E0327 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F44705B4211AF99F002E0327 /* Assets.xcassets */; };
@@ -60,6 +61,7 @@
 		631B8834227B243800718594 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		632EAA07227D7BD40005E217 /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		635C3357227F37DE005E9097 /* NewRestaurantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurantController.swift; sourceTree = "<group>"; };
+		63BA644722831C3B003DCE7C /* FoodPin.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FoodPin.xcdatamodel; sourceTree = "<group>"; };
 		F44705AA211AF99E002E0327 /* FoodPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F44705AD211AF99E002E0327 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F44705B2211AF99E002E0327 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		F44705A1211AF99D002E0327 = {
 			isa = PBXGroup;
 			children = (
+				63BA644622831C3B003DCE7C /* FoodPin.xcdatamodeld */,
 				631B880B22782D8100718594 /* Fonts */,
 				F44705AC211AF99E002E0327 /* FoodPin */,
 				F44705AB211AF99E002E0327 /* Products */,
@@ -290,6 +293,7 @@
 				631B88332279D73900718594 /* MapViewController.swift in Sources */,
 				631B882A2279486200718594 /* UIColor+Ext.swift in Sources */,
 				635C3358227F37DE005E9097 /* NewRestaurantController.swift in Sources */,
+				63BA644822831C3B003DCE7C /* FoodPin.xcdatamodeld in Sources */,
 				F481ACB0212188AD00B6DC2F /* RestaurantDetailViewController.swift in Sources */,
 				632EAA08227D7BD40005E217 /* RoundedTextField.swift in Sources */,
 				F44705AE211AF99E002E0327 /* AppDelegate.swift in Sources */,
@@ -493,6 +497,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		63BA644622831C3B003DCE7C /* FoodPin.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				63BA644722831C3B003DCE7C /* FoodPin.xcdatamodel */,
+			);
+			currentVersion = 63BA644722831C3B003DCE7C /* FoodPin.xcdatamodel */;
+			path = FoodPin.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F44705A2211AF99D002E0327 /* Project object */;
 }
