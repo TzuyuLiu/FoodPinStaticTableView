@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 //使用UITextFieldDelegate協定來偵測return被按下
 //使用UIImagePickerControllerDelegate與UINavigationControllerDelegate來知道選擇哪張圖片
@@ -14,6 +15,8 @@ class NewRestaurantController: UITableViewController , UITextFieldDelegate ,UIIm
     
     @IBOutlet var photoImageView: UIImageView!
 
+    var restaurant: RestaurantMO!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -278,8 +281,34 @@ class NewRestaurantController: UITableViewController , UITextFieldDelegate ,UIIm
             return
         }
         
-        //輸入完畢之後就可以跳回去主畫面了
-        dismiss(animated: true, completion: nil)
+        
+        //persistentContainer變數宣告在AppDelegate.swift，為了存取變數，需要先取得AppDelegate(使用UIApplication.shared.delegate as? AppDelegate來取得AppDelegate物件)
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate){
+            
+            //建立一個RestaurantMO物件，內容設定為持久性容器(persistentContainer)中的視圖內容(viewContext)
+            restaurant = RestaurantMO(context: appDelegate.persistentContainer.viewContext)
+            
+            //設定restaurant屬性
+            restaurant.name = nameTextField.text
+            restaurant.type = typeTextField.text
+            restaurant.location = addressTextField.text
+            restaurant.phone = phoneTextField.text
+            restaurant.summary =  descriptionTextView.text
+            restaurant.isVisited = false
+            
+            //取得圖片檔資訊
+            if let restaurantImage = photoImageView.image{
+                //使用圖片檔資料建立data
+                restaurant.image = restaurantImage.pngData()
+            }
+            
+            print("Saving data to context...")
+            
+            //存到資料庫
+            appDelegate.saveContext()
+            
+        }
+        
         
         //使用??來把內容拆出來
         print("name:\(nameTextField.text ?? " ")")
@@ -290,6 +319,9 @@ class NewRestaurantController: UITableViewController , UITextFieldDelegate ,UIIm
 
         
     
+        
+        //輸入完畢之後就可以跳回去主畫面了
+        dismiss(animated: true, completion: nil)
     }
  
     
