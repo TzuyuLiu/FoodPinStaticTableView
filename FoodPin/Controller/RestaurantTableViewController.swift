@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import CoreData //要使用NSFetchedRestsController
 
-class RestaurantTableViewController: UITableViewController {
+//NSFetchedResultsControllerDelegate協定在控制器讀取的結果有變化時，提供方法來通知他的委派
+class RestaurantTableViewController: UITableViewController , NSFetchedResultsControllerDelegate{
 
     var restaurants:[RestaurantMO] = []
 
+    
+    //將NSFetchedResultsControllerDelegate方法建立一個實例變數
+    var fetchResultController: NSFetchedResultsController<RestaurantMO>!
     
     // MARK: - View controller life cycle
     
@@ -30,9 +35,48 @@ class RestaurantTableViewController: UITableViewController {
         let item = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         self.navigationItem.backBarButtonItem = item
         
-        //設定大標題的文字為紅色，沒出現效果
-        if let customFont = UIFont(name: "Rubik-Medium", size: 40.0){
+        //設定大標題的文字為紅色，文字使用Rubik-Medium會找不到變成沒出現效果
+        if let customFont = UIFont(name: "Rubik", size: 40.0){
             navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor : UIColor(red: 231.0/255, green: 76.0/255, blue: 60.0/255, alpha: 1.0), NSAttributedString.Key.font: customFont ]
+        }
+        
+        
+        //從資料儲存區讀取資料
+        
+        //從RestaurantMO取得NSFetchRequest物件(建立fetchRequest連線)
+        let fetchRequest:NSFetchRequest<RestaurantMO> = RestaurantMO.fetchRequest()
+        
+        //使用NSSortDescriptro排序物件，指定sortDescriptor為排序方法
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        //誤了讀取變數，需要先取得AppDelegate的參照，使用UIApplication.shared.delegate as? Applegate來取得物件
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate){
+            
+            
+            let context = appDelegate.persistentContainer.viewContext
+            
+            //使初始化NSFetchedResultsController，並指定他的委派(delegate)來監聽資料變化
+            fetchResultController = NSFetchedResultsController(
+                fetchRequest: fetchRequest,
+                managedObjectContext: context,
+                sectionNameKeyPath: nil,
+                cacheName: nil)
+            
+            //記得要設置delegate，這樣才能在加入新餐廳時使用NSFetchedResultsController來更新tableView
+            fetchResultController.delegate = self
+            
+            do{
+                
+                //使用performFetch來執行讀取結果
+                try fetchResultController.performFetch()
+                if let fetchedObjects = fetchResultController.fetchedObjects{
+                    restaurants = fetchedObjects
+                }
+                
+            } catch {
+                print(error)
+            }
         }
         
     }
@@ -84,12 +128,22 @@ class RestaurantTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
-            // Delete the row from the data source
-            self.restaurants.remove(at: indexPath.row)
             
-            self.tableView.deleteRows(at: [indexPath], with: .fade)
+            //從資料儲存區刪除
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate){
+                
+                //從fetchResultController中取得所選的RestaurantMO物件
+                let context = appDelegate.persistentContainer.viewContext
+                let restaurantToDelete = self.fetchResultController.object(at: indexPath)
+                
+                //呼叫delete方法將他們刪除
+                context.delete(restaurantToDelete)
+                
+                //儲存這些耕變
+                appDelegate.saveContext()
+            }
             
-            // Call completion handler with true to indicate
+            // 以true值來呼叫完成處理器
             completionHandler(true)
         }
         
@@ -156,6 +210,54 @@ class RestaurantTableViewController: UITableViewController {
         
         return swipeConfiguration
     }
+    
+    //MARK:- NSFetchedResultsControllerDelegate
+    
+    //當NSFetchedResultsController準備開始處理內容更變時會被呼叫
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        
+        //準備開始更新
+        tableView.beginUpdates()
+    }
+    
+    //若託管物件內容有任何更變就會被呼叫(e.g.:加入新餐廳)
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        switch type {
+            
+        //表示插入新列
+        case .insert:
+            if let newIndexPath = newIndexPath{
+                tableView.insertRows(at: [newIndexPath], with: .fade)
+            }
+            
+        //表示刪除列
+        case .delete:
+            if let indexPath = indexPath{
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            
+        case .update:
+            if let indexPath = indexPath{
+                tableView.reloadRows(at: [indexPath], with: .fade)
+            }
+            
+        default:
+            tableView.reloadData()
+        }
+        
+        if let fetchedObjects = controller.fetchedObjects{
+            
+            restaurants = fetchedObjects as! [RestaurantMO]
+        }
+        
+    }
+    
+    //NSFetchedResultsController變更完成後會呼叫以下方法，告訴tableView已完成變更，他就會以動畫呈現變更
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
     
     // MARK: - Navigation
     
