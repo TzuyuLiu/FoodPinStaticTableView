@@ -10,10 +10,17 @@ import UIKit
 import CoreData //要使用NSFetchedRestsController
 
 //NSFetchedResultsControllerDelegate協定在控制器讀取的結果有變化時，提供方法來通知他的委派
-class RestaurantTableViewController: UITableViewController , NSFetchedResultsControllerDelegate{
+//使用UISearchResultsUpdating來更新搜尋結果
+class RestaurantTableViewController: UITableViewController , NSFetchedResultsControllerDelegate ,UISearchResultsUpdating{
 
     var restaurants:[RestaurantMO] = []
+    
+    
+    //為了加上搜尋列所以使用UISearchController
+    var searchController: UISearchController!
 
+    //儲存搜尋結果
+    var searchResults: [RestaurantMO] = []
     
     //將NSFetchedResultsControllerDelegate方法建立一個實例變數
     var fetchResultController: NSFetchedResultsController<RestaurantMO>!
@@ -79,6 +86,26 @@ class RestaurantTableViewController: UITableViewController , NSFetchedResultsCon
             }
         }
         
+        
+        //建立UISearchController實例(就是建立搜尋列)
+        //如果傳遞nil值，表示搜尋結果會顯示於你正在搜尋的相同視圖中
+        searchController = UISearchController(searchResultsController: nil)
+        
+        //告知搜尋控制器哪一個物件會負責更新搜尋結果
+        //使用tableHeaderView來將搜尋器固定在最前面
+        tableView.tableHeaderView = searchController.searchBar
+        
+        //指定目前類別為搜尋結果更新氣
+        searchController.searchResultsUpdater = self
+        
+        //控制器底下的內容在搜尋時期是否要變成暗淡的狀態，因為我們呈現的結果在相同的view，所以是false
+        searchController.dimsBackgroundDuringPresentation = false
+        
+        
+        //客製化搜尋列
+        searchController.searchBar.barTintColor = .white
+        
+        
     }
     
     //每次view出現時都會執行
@@ -97,12 +124,22 @@ class RestaurantTableViewController: UITableViewController , NSFetchedResultsCon
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        //當點擊搜尋欄位，搜尋介面就會被帶出來，isActive屬性會設定為true，用此決定顯示全部餐廳或是搜尋結果
+        if searchController.isActive{
+            
+            //此時就回傳result的數量
+            return searchResults.count
+        } else{
+            
+            //預設回傳餐廳數量
+            return restaurants.count
+        }
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return restaurants.count
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -110,16 +147,19 @@ class RestaurantTableViewController: UITableViewController , NSFetchedResultsCon
         let cellIdentifier = "datacell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RestaurantTableViewCell
         
+        //觀察搜尋列是否有打開來判斷是從搜尋結果取得餐廳還是原來的陣列取得餐廳
+        let restaurant = (searchController.isActive) ? searchResults[indexPath.row] : restaurants[indexPath.row]
+        
         // Configure the cell...
-        cell.nameLabel.text = restaurants[indexPath.row].name
+        cell.nameLabel.text = restaurant.name
         
         //圖片已經使用core data來存成data物件，要載入圖片是使用data參數來初始化UIImage物件
-        if let restaurantImage = restaurants[indexPath.row].image{
+        if let restaurantImage = restaurant.image{
             cell.thumbnailImageView.image = UIImage(data: restaurantImage as Data)
         }
-        cell.locationLabel.text = restaurants[indexPath.row].location
-        cell.typeLabel.text = restaurants[indexPath.row].type
-        cell.heartImageView.isHidden = restaurants[indexPath.row].isVisited ? false : true
+        cell.locationLabel.text = restaurant.location
+        cell.typeLabel.text = restaurant.type
+        cell.heartImageView.isHidden = restaurant.isVisited ? false : true
         
         return cell
     }
@@ -211,6 +251,17 @@ class RestaurantTableViewController: UITableViewController , NSFetchedResultsCon
         return swipeConfiguration
     }
     
+    
+    //在搜尋期間關閉cell的編輯
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
+        if searchController.isActive{
+            return false
+        } else {
+            return true
+        }
+    }
+    
     //MARK:- NSFetchedResultsControllerDelegate
     
     //當NSFetchedResultsController準備開始處理內容更變時會被呼叫
@@ -265,7 +316,9 @@ class RestaurantTableViewController: UITableViewController , NSFetchedResultsCon
         if segue.identifier == "showRestaurantDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destination as! RestaurantDetailViewController
-                destinationController.restaurant = restaurants[indexPath.row]
+                
+                //觀察搜尋列是否有打開來判斷是從搜尋結果取得餐廳還是原來的陣列取得餐廳
+                destinationController.restaurant = (searchController.isActive) ? searchResults[indexPath.row]: restaurants[indexPath.row]
             }
         }
     }
@@ -277,4 +330,42 @@ class RestaurantTableViewController: UITableViewController , NSFetchedResultsCon
             dismiss(animated: true, completion: nil)
     }
  
+    //MARK: - 搜尋列實作
+    
+    //找尋餐廳名稱
+    func filterContent(for searchText: String){
+        
+        //filter:swift中的內建方法，用來過濾目前的陣列
+        //使用filter做搜尋，會回傳一個新的陣列，內容是符合搜尋的項目(searchText)
+        searchResults = restaurants.filter({ (restaurant) -> Bool in
+            
+            if let name = restaurant.name,let location = restaurant.location{
+                
+                //使用localizedCaseInsensitiveContains檢查餐廳名稱是否有含在搜尋文字裡面，有救回傳true
+                let isMatch = name.localizedCaseInsensitiveContains(searchText) || location.localizedCaseInsensitiveContains(searchText)
+                
+                return isMatch
+            }
+            
+           
+           
+            return false
+        })
+    }
+    
+    //更新搜尋結果(使用UISearchResultsUpdating)
+    //當使用者選取搜尋列或輸入搜尋關鍵字，updateSearchResults就會被呼叫，searchController是指使用者輸入的關鍵字
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        if let searchText = searchController.searchBar.text{
+            
+            filterContent(for: searchText)
+            tableView.reloadData()
+        }
+    }
+    
+ 
+    
+    
+    
 }
