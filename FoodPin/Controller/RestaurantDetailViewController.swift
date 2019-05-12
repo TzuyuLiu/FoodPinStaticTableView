@@ -52,6 +52,11 @@ class RestaurantDetailViewController: UIViewController , UITableViewDataSource ,
         //是否要自動調整表格視圖的位置？我們不調整位置，讓導覽列與表格試圖重疊
         tableView.contentInsetAdjustmentBehavior = .never
         
+        //顯示餐廳評價
+        if let rating = restaurant.rating{
+            headerView.ratingImageView.image = UIImage(named: rating)
+        }
+        
     }
 
     //每次view載入都會執行
@@ -112,7 +117,9 @@ class RestaurantDetailViewController: UIViewController , UITableViewDataSource ,
             //呈現敘述
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailTextCell.self), for: indexPath) as! RestaurantDetailTextCell
-            cell.descriptionLabel.text = restaurant.description
+            
+            //作業：修復bug
+            cell.descriptionLabel.text = restaurant.summary
             cell.selectionStyle = .none
             
             return cell
@@ -179,13 +186,18 @@ class RestaurantDetailViewController: UIViewController , UITableViewDataSource ,
         
         dismiss(animated: true, completion: {
            
-            //先將圖片縮小，再將圖片放回原來大小
             if let rating = segue.identifier{
                 
                 self.restaurant.rating = rating
                 self.headerView.ratingImageView.image = UIImage(named: rating)
                 
+                //將資料儲存到資料庫
+                if let appDelegate = (UIApplication.shared.delete as? AppDelegate){
+                    appDelegate.saveContext()
+                }
                 
+                
+                //先將圖片縮小，再將圖片放回原來大小
                 let scaleTransform = CGAffineTransform.init(scaleX: 0.1, y: 0.1)
                 self.headerView.ratingImageView.transform = scaleTransform
                 self.headerView.ratingImageView.alpha = 0
