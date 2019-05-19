@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		630CF478228FA15100213FC7 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 630CF477228FA15100213FC7 /* Onboarding.storyboard */; };
 		631B881622782DB900718594 /* Rubik-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 631B880C22782DB800718594 /* Rubik-Black.ttf */; };
 		631B881722782DB900718594 /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 631B880D22782DB800718594 /* Rubik-Light.ttf */; };
 		631B881822782DB900718594 /* Rubik-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 631B880E22782DB800718594 /* Rubik-BlackItalic.ttf */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		630CF477228FA15100213FC7 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		631B880C22782DB800718594 /* Rubik-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Rubik-Black.ttf"; path = "Rubik/Rubik-Black.ttf"; sourceTree = SOURCE_ROOT; };
 		631B880D22782DB800718594 /* Rubik-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Rubik-Light.ttf"; path = "Rubik/Rubik-Light.ttf"; sourceTree = SOURCE_ROOT; };
 		631B880E22782DB800718594 /* Rubik-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Rubik-BlackItalic.ttf"; path = "Rubik/Rubik-BlackItalic.ttf"; sourceTree = SOURCE_ROOT; };
@@ -122,6 +124,7 @@
 		F44705A1211AF99D002E0327 = {
 			isa = PBXGroup;
 			children = (
+				630CF477228FA15100213FC7 /* Onboarding.storyboard */,
 				63BA644622831C3B003DCE7C /* FoodPin.xcdatamodeld */,
 				631B880B22782D8100718594 /* Fonts */,
 				F44705AC211AF99E002E0327 /* FoodPin */,
@@ -270,6 +273,7 @@
 				631B881622782DB900718594 /* Rubik-Black.ttf in Resources */,
 				631B881B22782DB900718594 /* Rubik-BoldItalic.ttf in Resources */,
 				F44705B3211AF99E002E0327 /* Main.storyboard in Resources */,
+				630CF478228FA15100213FC7 /* Onboarding.storyboard in Resources */,
 				631B881D22782DB900718594 /* Rubik-MediumItalic.ttf in Resources */,
 				631B881C22782DB900718594 /* Rubik-Medium.ttf in Resources */,
 			);
