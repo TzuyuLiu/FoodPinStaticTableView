@@ -17,18 +17,18 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Page View Controller-->
+        <!--Walkthrough Page View Controller-->
         <scene sceneID="FQd-e9-JNO">
             <objects>
-                <pageViewController storyboardIdentifier="WalkthroughController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="hYW-xt-W6s" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="WalkthroughPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="hYW-xt-W6s" customClass="WalkthroughPageViewController" customModule="FoodPin" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4xT-Ll-jqD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1646" y="21"/>
         </scene>
-        <!--View Controller-->
+        <!--Walkthrough Content View Controller-->
         <scene sceneID="Lad-qD-lJv">
             <objects>
-                <viewController id="BNV-as-VvJ" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WalkthroughContentViewController" id="BNV-as-VvJ" customClass="WalkthroughContentViewController" customModule="FoodPin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="leA-2x-1Qv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="616.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -72,6 +72,11 @@
                         <viewLayoutGuide key="safeArea" id="6RY-EL-Tq6"/>
                     </view>
                     <size key="freeformSize" width="414" height="616.5"/>
+                    <connections>
+                        <outlet property="contentImageVew" destination="aUA-DT-uGA" id="4UO-Hw-6Fi"/>
+                        <outlet property="headingLabel" destination="PjJ-hC-kut" id="t4v-gx-y4w"/>
+                        <outlet property="subHeadingLabel" destination="Rxh-em-0qU" id="xEc-Mf-4Tn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9De-sp-yos" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
