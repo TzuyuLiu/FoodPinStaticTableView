@@ -121,6 +121,23 @@ class RestaurantTableViewController: UITableViewController , NSFetchedResultsCon
         
     }
     
+    //viewDidAppear會由ios自動呼叫
+    override func viewDidAppear(_ animated: Bool) {
+        
+        //判斷是否要跳過導覽，若看過就跳過導覽
+        if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough"){
+            return
+        }
+        
+        let storyboard  = UIStoryboard(name: "Onboarding", bundle: nil)
+        
+        //將WalkthroughContentViewController物件實體化，並將他已強制回應(Modal)方式呈現
+        if let walkthroughViewController = storyboard.instantiateViewController(withIdentifier: "WalkthroughViewController") as? WalkthroughViewController {
+             present(walkthroughViewController, animated: true, completion:  nil)
+        }
+        
+    }
+    
 
     // MARK: - Table view data source
 
