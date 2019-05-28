@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sqn-Qr-6qc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="t0N-c3-O2z">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -106,7 +106,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Btd-fi-7zE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1056.5217391304348" y="151.33928571428569"/>
+            <point key="canvasLocation" x="2114" y="151"/>
         </scene>
         <!--Restaurant Detail View Controller-->
         <scene sceneID="7Al-S6-LLM">
@@ -371,7 +371,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gaE-Wc-soX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1813.0434782608697" y="150.66964285714286"/>
+            <point key="canvasLocation" x="2872" y="150"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="rn9-jJ-R8k">
@@ -400,7 +400,65 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KWL-0G-UHK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2542" y="149"/>
+            <point key="canvasLocation" x="3948" y="150"/>
+        </scene>
+        <!--Discover-->
+        <scene sceneID="rfE-CE-QC4">
+            <objects>
+                <tableViewController storyboardIdentifier="UITableViewController-BHU-4Y-vJc" id="BHU-4Y-vJc" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="X4w-ij-pm7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="FCq-Pg-dcU">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FCq-Pg-dcU" id="c8f-dt-Hgk">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="BHU-4Y-vJc" id="m7f-yd-3mY"/>
+                            <outlet property="delegate" destination="BHU-4Y-vJc" id="2VY-lo-Ifl"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Discover" id="6SJ-7f-xxO"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1fM-lN-MET" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="294" y="1591"/>
+        </scene>
+        <!--About-->
+        <scene sceneID="Vrz-YS-RUZ">
+            <objects>
+                <tableViewController storyboardIdentifier="UITableViewController-ipg-Gx-aA2" id="ipg-Gx-aA2" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="LDU-0B-c6U">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="he3-aJ-gLH">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="he3-aJ-gLH" id="QcM-yL-NbX">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ipg-Gx-aA2" id="MMj-Jd-jD4"/>
+                            <outlet property="delegate" destination="ipg-Gx-aA2" id="ueM-XH-pbI"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="About" id="bDi-RE-TSG"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ulA-rO-ChO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1203" y="1604"/>
         </scene>
         <!--New Restaurant-->
         <scene sceneID="JHU-ln-dNJ">
@@ -638,7 +696,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tzs-j6-MR7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="3Sz-0w-erH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2155.072463768116" y="965.625"/>
+            <point key="canvasLocation" x="3219" y="920"/>
         </scene>
         <!--Review View Controller-->
         <scene sceneID="oP4-Ks-rhy">
@@ -659,10 +717,10 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="prX-M2-rMI">
-                                <rect key="frame" x="125" y="280.5" width="164" height="335"/>
+                                <rect key="frame" x="93.5" y="207.5" width="227" height="481"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fVD-gp-Ffa">
-                                        <rect key="frame" x="0.0" y="0.0" width="143" height="59"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="202" height="82"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
                                         <state key="normal" title="LOVE" image="love">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -672,7 +730,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fu3-20-4fj">
-                                        <rect key="frame" x="0.0" y="69" width="121" height="59"/>
+                                        <rect key="frame" x="0.0" y="92" width="181" height="83"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
                                         <state key="normal" title="Cool" image="cool">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -682,7 +740,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24Q-81-Rat">
-                                        <rect key="frame" x="0.0" y="138" width="164" height="59"/>
+                                        <rect key="frame" x="0.0" y="185" width="227" height="86"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
                                         <state key="normal" title="Happy" image="happy">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -692,7 +750,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VB2-fw-gPZ">
-                                        <rect key="frame" x="0.0" y="207" width="105" height="59"/>
+                                        <rect key="frame" x="0.0" y="281" width="167" height="87"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
                                         <state key="normal" title="Sad" image="sad">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -702,7 +760,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ytl-67-Ne3">
-                                        <rect key="frame" x="0.0" y="276" width="147" height="59"/>
+                                        <rect key="frame" x="0.0" y="378" width="218" height="103"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
                                         <state key="normal" title="Angry" image="angry">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -742,12 +800,13 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w1Y-ld-4a5" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="MIQ-vi-Elb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3450.7246376811595" y="911.38392857142856"/>
+            <point key="canvasLocation" x="4249" y="920"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Favorite-->
         <scene sceneID="cmZ-La-i97">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Sqn-Qr-6qc" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Favorite" image="favorite" id="ms9-ls-hsD"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2P8-Il-Lal">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -760,7 +819,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8bs-1n-Jwo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="295" y="152"/>
+            <point key="canvasLocation" x="1204.3478260869565" y="151.33928571428569"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="el2-qU-XUX">
@@ -778,7 +837,46 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C3l-Dh-gP1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1055" y="966"/>
+            <point key="canvasLocation" x="2119" y="920"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="OqT-ES-HNX">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="t0N-c3-O2z" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dYl-Tw-5W5">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Sqn-Qr-6qc" kind="relationship" relationship="viewControllers" id="nXU-In-plc"/>
+                        <segue destination="6fW-6T-yZw" kind="relationship" relationship="viewControllers" id="fqn-F9-J2g"/>
+                        <segue destination="BmF-EW-69d" kind="relationship" relationship="viewControllers" id="geW-qd-9g0"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pX9-SN-L3j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="294.20289855072468" y="151.33928571428569"/>
+        </scene>
+        <!--About-->
+        <scene sceneID="JvY-Hz-JkU">
+            <objects>
+                <viewControllerPlaceholder storyboardName="About" id="BmF-EW-69d" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="GLJ-9A-5Fh"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cXX-KL-DeJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1203" y="877"/>
+        </scene>
+        <!--Discover-->
+        <scene sceneID="SYP-jV-xTt">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Discover" id="6fW-6T-yZw" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="rk6-hO-xWm"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FKj-uL-7Uk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="293" y="877"/>
         </scene>
     </scenes>
     <resources>
@@ -786,6 +884,7 @@
         <image name="close" width="16" height="16"/>
         <image name="cool" width="78" height="83"/>
         <image name="cross" width="33" height="32"/>
+        <image name="favorite" width="22" height="22"/>
         <image name="happy" width="78" height="86"/>
         <image name="heart-tick" width="22" height="21"/>
         <image name="love" width="78" height="82"/>

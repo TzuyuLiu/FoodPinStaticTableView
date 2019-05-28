@@ -23,7 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().backIndicatorImage = backButtonImage
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
         
-
+        //標籤列
+        //更改目前選到的標籤顏色
+        UITabBar.appearance().tintColor = UIColor(red: 231, green: 76, blue: 60)
+        //更改標籤列背景顏色
+        UITabBar.appearance().barTintColor = UIColor(red: 250, green: 250, blue: 250)
+        //可以定義標籤列的背景圖片
+        //UITabBar.appearance().backgroundImage = UIImage(named: "tabbar-background")
         return true
     }
     
@@ -32,12 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //persistentContainer是NSPersistentContainer的實例
     lazy var persistentContainer: NSPersistentContainer = {
-        /*
-         The persistent container for the application. This implementation
-         creates and returns a container, having loaded the store for the
-         application to it. This property is optional since there are legitimate
-         error conditions that could cause the creation of the store to fail.
-         */
         
         //以名為FoodPin的持久性儲存器來初始化，在應用程式中封裝Core Data堆疊
         let container = NSPersistentContainer(name: "FoodPin")
@@ -45,15 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
@@ -75,8 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
-
 }
 
 

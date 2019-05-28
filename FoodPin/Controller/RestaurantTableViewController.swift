@@ -333,7 +333,8 @@ class RestaurantTableViewController: UITableViewController , NSFetchedResultsCon
         if segue.identifier == "showRestaurantDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destination as! RestaurantDetailViewController
-                
+                //隱藏標籤列(最下面那列)
+                destinationController.hidesBottomBarWhenPushed = true
                 //觀察搜尋列是否有打開來判斷是從搜尋結果取得餐廳還是原來的陣列取得餐廳
                 destinationController.restaurant = (searchController.isActive) ? searchResults[indexPath.row]: restaurants[indexPath.row]
             }
@@ -380,9 +381,5 @@ class RestaurantTableViewController: UITableViewController , NSFetchedResultsCon
             tableView.reloadData()
         }
     }
-    
- 
-    
-    
     
 }
